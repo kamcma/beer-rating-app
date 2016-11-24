@@ -19,6 +19,7 @@ namespace BeerApp.Data
                 new Brewery{Name="Flying Dog Brewery",Country=Country.UnitedStates},
                 new Brewery{Name="Dogfish Head Brewery",Country=Country.UnitedStates},
                 new Brewery{Name="Ballast Point Brewing Company",Country=Country.UnitedStates},
+                new Brewery{Name="Revolution Brewing",Country=Country.UnitedStates},
             };
 
             foreach (Brewery b in breweries)
