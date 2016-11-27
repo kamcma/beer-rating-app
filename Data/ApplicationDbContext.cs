@@ -11,10 +11,10 @@ namespace BeerApp.Data
         }
 
         public DbSet<Brewery> Breweries {get;set;}
-        public DbSet<User> Users {get;set;}
+        //public DbSet<User> Users {get;set;}
         public DbSet<Beer> Beers {get;set;}
         public DbSet<Style> Styles {get;set;}
-        public DbSet<BeerRating> BeerRatings {get;set;}
-        public DbSet<StyleRating> StyleRatings {get;set;}
+        //public DbSet<BeerRating> BeerRatings {get;set;}
+        //public DbSet<StyleRating> StyleRatings {get;set;}
     }
 }

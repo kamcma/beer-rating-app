@@ -14,6 +14,7 @@ namespace BeerApp
         public Startup(IHostingEnvironment env)
         {
             Configuration = new ConfigurationBuilder()
+                .AddEnvironmentVariables()
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json")
                 .Build();

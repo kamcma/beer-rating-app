@@ -6,13 +6,9 @@ namespace BeerApp.Models
 {
     public class StyleRating
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public int StyleRatingID {get;set;}
-        [Required]
-        public int UserID {get;set;}
         public User User {get;set;}
-        [Required]
-        public int StyleID {get;set;}
         public Style Style {get;set;}
         [Required]
         [RangeAttribute(0,5)]

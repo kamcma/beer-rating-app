@@ -4,7 +4,7 @@ namespace BeerApp.Models
 {
     public class Style
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public int StyleID {get;set;}
         public string Name {get;set;}
         public Yeast Yeast {get;set;}

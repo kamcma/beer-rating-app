@@ -5,24 +5,24 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BeerApp.Controllers
 {
-    public class BreweryController : Controller
+    public class BeerController : Controller
     {
         private readonly ApplicationDbContext _context;
 
-        public BreweryController(ApplicationDbContext context)
+        public BeerController(ApplicationDbContext context)
         {
             _context = context;
         }
 
         public string Test()
         {
-            return "Hello from Brewery Controller";
+            return "Hello from Beer Controller";
         }
         
         [HttpGet]
-        public JsonResult AmericanBreweries()
+        public JsonResult Beers()
         {
-            var result = _context.Breweries.Where(brewery => brewery.Country == BeerApp.Models.Country.UnitedStates);
+            var result = _context.Beers;
             return Json(result);
         }
     }

@@ -6,7 +6,7 @@ namespace BeerApp.Models
 {
     public class User
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public int UserID {get;set;}
         public string FirstName {get;set;}
         public string LastName {get;set;}

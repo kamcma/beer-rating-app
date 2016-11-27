@@ -6,12 +6,10 @@ namespace BeerApp.Models
 {
     public class BeerRating
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public int BeerRatingID {get;set;}
-        [Required]
         public int UserID {get;set;}
         public User User {get;set;}
-        [Required]
         public int BeerID {get;set;}
         public Beer Beer {get;set;}
         [Required]

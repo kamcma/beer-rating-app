@@ -16,7 +16,8 @@
     "Microsoft.AspNetCore.Server.Kestrel":"1.*",
     "Microsoft.AspNetCore.StaticFiles":"1.*",
     "Microsoft.EntityFrameworkCore.SqlServer": "1.*",
-    "Microsoft.Extensions.Configuration.Json": "1.*"
+    "Microsoft.Extensions.Configuration.Json": "1.*",
+    "Microsoft.Extensions.Configuration.EnvironmentVariables": "1.*"
   },
   "frameworks": {
     "netcoreapp1.1": {}
