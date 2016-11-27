@@ -8,10 +8,11 @@ namespace BeerApp.Models
     {
         [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public int StyleRatingID {get;set;}
+        public int UserID {get;set;}
         public User User {get;set;}
+        public int StyleID {get;set;}
         public Style Style {get;set;}
-        [Required]
-        [RangeAttribute(0,5)]
+        [Required,RangeAttribute(0,5)]
         public byte Rating {get;set;}
         public DateTime Updated {get;set;}
     }

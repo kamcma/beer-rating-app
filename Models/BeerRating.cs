@@ -12,8 +12,7 @@ namespace BeerApp.Models
         public User User {get;set;}
         public int BeerID {get;set;}
         public Beer Beer {get;set;}
-        [Required]
-        [RangeAttribute(0,5)]
+        [Required,RangeAttribute(0,5)]
         public byte Rating {get;set;}
         public DateTime Updated {get;set;}
     }
