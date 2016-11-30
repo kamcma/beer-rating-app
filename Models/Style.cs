@@ -6,7 +6,9 @@ namespace BeerApp.Models
 {
     public class Style
     {
-        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public int StyleID {get;set;}
+        [Required]
         public string Name {get;set;}
         public Yeast? Yeast {get;set;}
         public ICollection<Beer> Beers {get;set;}
