@@ -26,20 +26,14 @@ namespace BeerApp
             services.AddMvc();
         }
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ApplicationDbContext context)
-        {
-            
-            if (env.IsDevelopment() || true)
+        {            
+            if (env.IsDevelopment())
             {
-                //app.UseDeveloperExceptionPage();
+                app.UseDeveloperExceptionPage();
                 DbInitializer.Initialize(context);
             }
 
-            app.UseMvc(routes => {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}"
-                );
-            });
+            app.UseMvcWithDefaultRoute();
 
 
         }
