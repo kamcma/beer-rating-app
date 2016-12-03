@@ -25,5 +25,12 @@ namespace BeerApp.Controllers
             var result = _context.Beers;
             return Json(result);
         }
+
+        [HttpGet]
+        public JsonResult RecommendedBeers()
+        {
+            var result = _context.Beers;
+            return Json(result);
+        }
     }
 }

@@ -14,15 +14,15 @@ namespace BeerApp.Controllers
             _context = context;
         }
 
-        public string Test()
+        public IActionResult Index()
         {
-            return "Hello from Brewery Controller";
+            return View();
         }
         
         [HttpGet]
-        public JsonResult AmericanBreweries()
+        public JsonResult Breweries()
         {
-            var result = _context.Breweries.Where(brewery => brewery.Country == BeerApp.Models.Country.UnitedStates);
+            var result = _context.Breweries;
             return Json(result);
         }
     }
