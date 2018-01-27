@@ -8,8 +8,8 @@ namespace BeerApp.Data.Contracts
     {
         IEnumerable<TEntity> GetAll(Expression<Func<TEntity, bool>> predicate = null);
         TEntity Get(Expression<Func<TEntity, bool>> predicate);
-        TEntity Create(TEntity entity);
-        TEntity Update(TEntity entity);
-        TEntity Delete(TEntity entity);
+        int Create(TEntity entity);
+        int Update(TEntity entity);
+        int Delete(TEntity entity);
     }
 }
