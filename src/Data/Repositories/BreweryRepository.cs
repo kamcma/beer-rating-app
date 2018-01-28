@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Linq.Expressions;
 using BeerApp.Data.Contracts;
 using BeerApp.Data.Models;
@@ -7,25 +8,41 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BeerApp.Data
 {
-    public class BreweryRepository : IBreweryRepository
+    public class BreweryRepository : IRepository<Brewery>
     {
-        private readonly Repository<Brewery> repository;
+        private readonly IBeerAppDbContext context;
 
-        public BreweryRepository(DbContext context)
+        public BreweryRepository(IBeerAppDbContext context)
         {
-            repository = new Repository<Brewery>(context);
+            this.context = context;
         }
 
-        public int Create(Brewery brewery) => repository.Create(brewery);
+        public int Create(Brewery brewery)
+        {
+            context.Breweries.Add(brewery);
+            return context.SaveChanges();
+        }
 
         public Brewery Get(Expression<Func<Brewery, bool>> predicate) =>
-            repository.Get(predicate);
+            context.Breweries
+                .Include(brewery => brewery.Beers)
+                .FirstOrDefault(predicate ?? (_ => true));
 
         public IEnumerable<Brewery> GetAll(Expression<Func<Brewery, bool>> predicate = null) =>
-            repository.GetAll(predicate);
+            context.Breweries
+                .Include(brewery => brewery.Beers)
+                .Where(predicate ?? (_ => true));
 
-        public int Update(Brewery brewery) => repository.Update(brewery);
+        public int Update(Brewery brewery)
+        {
+            context.Breweries.Update(brewery);
+            return context.SaveChanges();
+        }
 
-        public int Delete(Brewery brewery) => repository.Delete(brewery);
+        public int Delete(Brewery brewery)
+        {
+            context.Breweries.Remove(brewery);
+            return context.SaveChanges();
+        }
     }
 }

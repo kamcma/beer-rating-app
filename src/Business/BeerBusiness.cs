@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using BeerApp.Business.Contracts;
 using BeerApp.Data.Contracts;
 using BeerApp.Data.Models;
@@ -7,14 +8,25 @@ namespace BeerApp.Business
 {
     public class BeerBusiness : IBeerBusiness
     {
-        private readonly IBeerRepository beerRepository;
+        private readonly IRepository<Beer> beerRepository;
 
-        public BeerBusiness(IBeerRepository beerRepository)
+        public BeerBusiness(IRepository<Beer> beerRepository)
         {
             this.beerRepository = beerRepository;
         }
 
         public IEnumerable<Beer> GetAllBeers() =>
             beerRepository.GetAll();
+
+        public IEnumerable<Beer> GetAllBeersByRating(
+            int pageIndex = 0,
+            bool descending = true
+        ) =>
+            beerRepository.GetAll().AsQueryable()
+                .Where(beer => beer.Ratings.Count > 0)
+                .OrderByDescending(beer =>
+                    beer.Ratings.Average(rating => rating.Rating ? 1.0 : 0.0)
+                )
+                .Page(pageIndex, 10);
     }
 }
