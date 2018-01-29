@@ -35,6 +35,10 @@ namespace BeerApp.Data
             modelBuilder.Entity<Beer>()
                 .HasIndex(new string[] { beerShadowFK })
                 .HasName("beer_brewery_name_idx");
+
+            modelBuilder.Entity<User>()
+                .HasKey(user => user.EmailAddress)
+                .HasName("user_email_address_pkey");
         }
     }
 
