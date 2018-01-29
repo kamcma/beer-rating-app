@@ -8,24 +8,24 @@ namespace BeerApp.Business
 {
     public class BeerBusiness : IBeerBusiness
     {
-        private readonly IBeerRepository beerRepository;
+        private readonly IBeerDbContext beerContext;
 
-        public BeerBusiness(IBeerRepository beerRepository)
+        public BeerBusiness(IBeerDbContext beerRepository)
         {
-            this.beerRepository = beerRepository;
+            this.beerContext = beerRepository;
         }
 
         public IEnumerable<Beer> GetAllBeers() =>
-            beerRepository.GetAll();
+            beerContext.Beers;
 
         public IEnumerable<Beer> GetAllBeersByRating(
             int pageIndex = 0,
             bool descending = true
         ) =>
-            beerRepository.GetAll().AsQueryable()
+            beerContext.Beers
                 .Where(beer => beer.Ratings.Count > 0)
                 .OrderByDescending(beer =>
-                    beer.Ratings.Average(rating => rating.Rating ? 1.0 : 0.0)
+                    beer.Ratings.Average(rating => rating.ThumbsUp ? 1.0 : 0.0)
                 )
                 .Page(pageIndex, 10);
     }

@@ -5,14 +5,17 @@ using Microsoft.EntityFrameworkCore.Design;
 
 namespace BeerApp.Data
 {
-    public class BeerAppDbContext : DbContext, IBeerAppDbContext
+    public class BeerAppDbContext : DbContext,
+        IBreweryDbContext,
+        IBeerDbContext,
+        IUserDbContext
     {
         public BeerAppDbContext(DbContextOptions<BeerAppDbContext> options)
             : base(options) { }
 
-        public virtual DbSet<Beer> Beers { get; set; }
-        public virtual DbSet<Brewery> Breweries { get; set; }
-        public virtual DbSet<BeerRating> BeerRatings { get; set; }
+        public DbSet<Brewery> Breweries { get; set; }
+        public DbSet<Beer> Beers { get; set; }
+        public DbSet<User> Users { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

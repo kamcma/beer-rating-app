@@ -37,9 +37,7 @@ namespace BeerApp.BusinessTests
             });
             context.SaveChanges();
 
-            var repository = new BreweryRepository(context);
-
-            var service = new BreweryBusiness(repository);
+            var service = new BreweryBusiness(context);
 
             var breweries = service.GetAllBreweries();
 

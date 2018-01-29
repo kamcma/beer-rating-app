@@ -7,14 +7,14 @@ namespace BeerApp.Business
 {
     public class BreweryBusiness : IBreweryBusiness
     {
-        private readonly IBreweryRepository breweryRepository;
+        private readonly IBreweryDbContext breweryContext;
 
-        public BreweryBusiness(IBreweryRepository breweryRepository)
+        public BreweryBusiness(IBreweryDbContext breweryRepository)
         {
-            this.breweryRepository = breweryRepository;
+            this.breweryContext = breweryRepository;
         }
 
         public IEnumerable<Brewery> GetAllBreweries() =>
-            breweryRepository.GetAll();
+            breweryContext.Breweries;
     }
 }
