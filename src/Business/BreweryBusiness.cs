@@ -7,9 +7,9 @@ namespace BeerApp.Business
 {
     public class BreweryBusiness : IBreweryBusiness
     {
-        private readonly IRepository<Brewery> breweryRepository;
+        private readonly IBreweryRepository breweryRepository;
 
-        public BreweryBusiness(IRepository<Brewery> breweryRepository)
+        public BreweryBusiness(IBreweryRepository breweryRepository)
         {
             this.breweryRepository = breweryRepository;
         }

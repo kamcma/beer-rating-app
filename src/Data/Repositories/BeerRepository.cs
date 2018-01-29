@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BeerApp.Data
 {
-    public class BeerRepository : IRepository<Beer>
+    public class BeerRepository : IBeerRepository
     {
         private readonly IBeerAppDbContext context;
 

@@ -8,9 +8,9 @@ namespace BeerApp.Business
 {
     public class BeerBusiness : IBeerBusiness
     {
-        private readonly IRepository<Beer> beerRepository;
+        private readonly IBeerRepository beerRepository;
 
-        public BeerBusiness(IRepository<Beer> beerRepository)
+        public BeerBusiness(IBeerRepository beerRepository)
         {
             this.beerRepository = beerRepository;
         }
