@@ -1,29 +1,31 @@
+using System;
 using BeerApp.Data.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace BeerApp.Data.Contracts
 {
-    public interface IBreweryDbContext
+    public interface IModelDbContext : IDisposable
+    {
+        int SaveChanges();
+    }
+
+    public interface IBreweryDbContext : IModelDbContext
     {
         DbSet<Brewery> Breweries { get; set; }
-        int SaveChanges();
     }
 
-    public interface IBeerDbContext
+    public interface IBeerDbContext : IModelDbContext
     {
         DbSet<Beer> Beers { get; set; }
-        int SaveChanges();
     }
 
-    public interface IUserDbContext
+    public interface IUserDbContext : IModelDbContext
     {
         DbSet<User> Users { get; set; }
-        int SaveChanges();
     }
 
-    public interface IBeerRatingDbContext
+    public interface IBeerRatingDbContext : IModelDbContext
     {
         DbSet<BeerRating> BeerRatings { get; set; }
-        int SaveChanges();
     }
 }
