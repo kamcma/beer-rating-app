@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace BeerApp.Data.Models
@@ -6,6 +7,11 @@ namespace BeerApp.Data.Models
     [Table("user")]
     public class User
     {
+        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Column("id")]
+        public int Id { get; set; }
+
         [Column("first_name")]
         public string FirstName { get; set; }
 
@@ -15,8 +21,9 @@ namespace BeerApp.Data.Models
         [Column("email_address")]
         public string EmailAddress { get; set; }
 
+        [Column("country")]
         public Country Country { get; set; }
 
-        public List<BeerRating> BeerRatings { get; set; }
+        public virtual ICollection<BeerRating> BeerRatings { get; set; }
     }
 }

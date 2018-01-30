@@ -8,40 +8,32 @@ namespace BeerApp.Data
     public class BeerAppDbContext : DbContext,
         IBreweryDbContext,
         IBeerDbContext,
-        IUserDbContext
+        IUserDbContext,
+        IBeerRatingDbContext
     {
         public BeerAppDbContext(DbContextOptions<BeerAppDbContext> options)
             : base(options) { }
 
-        public DbSet<Brewery> Breweries { get; set; }
-        public DbSet<Beer> Beers { get; set; }
-        public DbSet<User> Users { get; set; }
+        public virtual DbSet<Brewery> Breweries { get; set; }
+        public virtual DbSet<Beer> Beers { get; set; }
+        public virtual DbSet<BeerRating> BeerRatings { get; set; }
+        public virtual DbSet<User> Users { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Brewery>()
-                .HasKey(brewery => brewery.Name)
-                .HasName("brewery_name_pkey");
-
-            string beerShadowFK = "BreweryName";
-            modelBuilder.Entity<Beer>()
-                .Property<string>(beerShadowFK)
-                .HasColumnName("brewery_name");
-            modelBuilder.Entity<Beer>()
-                .HasKey(new string[] { "Name", beerShadowFK })
-                .HasName("beer_name_brewery_name_pkey");
             modelBuilder.Entity<Beer>()
                 .HasOne(beer => beer.Brewery)
                 .WithMany(brewery => brewery.Beers)
-                .HasForeignKey(new string[] { beerShadowFK })
-                .HasConstraintName("beer_brewery_name_fkey");
-            modelBuilder.Entity<Beer>()
-                .HasIndex(new string[] { beerShadowFK })
-                .HasName("beer_brewery_name_idx");
+                .HasForeignKey(beer => beer.BreweryId);
 
-            modelBuilder.Entity<User>()
-                .HasKey(user => user.EmailAddress)
-                .HasName("user_email_address_pkey");
+            modelBuilder.Entity<BeerRating>()
+                .HasOne(beerRating => beerRating.User)
+                .WithMany(user => user.BeerRatings)
+                .HasForeignKey(beerRating => beerRating.UserId);
+            modelBuilder.Entity<BeerRating>()
+                .HasOne(beerRating => beerRating.Beer)
+                .WithMany(beer => beer.BeerRatings)
+                .HasForeignKey(beerRating => beerRating.BeerId);
         }
     }
 
