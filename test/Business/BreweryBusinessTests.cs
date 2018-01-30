@@ -39,9 +39,11 @@ namespace BeerApp.BusinessTests
 
             var service = new BreweryBusiness(context);
 
-            var breweries = service.GetAllBreweries();
-
+            var breweries = service.GetAll();
             Assert.AreEqual(3, breweries.Count());
+
+            var usBreweries = service.GetAll(brewery => brewery.Country == Country.UnitedStates);
+            Assert.AreEqual(2, usBreweries.Count());
         }
     }
 }
