@@ -25,5 +25,7 @@ namespace BeerApp.Data.Models
         public Country Country { get; set; }
 
         public virtual ICollection<BeerRating> BeerRatings { get; set; }
+
+        public override string ToString() => $"{this.FirstName} {this.LastName}";
     }
 }

@@ -21,5 +21,7 @@ namespace BeerApp.Data.Models
         public virtual Brewery Brewery { get; set; }
 
         public virtual ICollection<BeerRating> BeerRatings { get; set; }
+
+        public override string ToString() => this.Name;
     }
 }

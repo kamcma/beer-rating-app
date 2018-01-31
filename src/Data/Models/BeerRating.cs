@@ -24,5 +24,7 @@ namespace BeerApp.Data.Models
         public int BeerId { get; set; }
 
         public virtual Beer Beer { get; set; }
+
+        public override string ToString() => this.ThumbsUp ? "👍" : "👎";
     }
 }
