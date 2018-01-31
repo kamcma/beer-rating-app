@@ -8,9 +8,7 @@ namespace BeerApp.Business
             this IOrderedQueryable<T> query,
             int pageNumber,
             int pageLength
-        ) where T : class
-        {
-            return query.Skip(pageNumber * pageLength).Take(pageLength);
-        }
+        ) where T : class =>
+            query.Skip(pageNumber * pageLength).Take(pageLength);
     }
 }

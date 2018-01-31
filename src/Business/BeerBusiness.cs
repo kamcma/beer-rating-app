@@ -12,10 +12,8 @@ namespace BeerApp.Business
     {
         private readonly IBeerDbContext beerContext;
 
-        public BeerBusiness(IBeerDbContext beerRepository)
-        {
-            this.beerContext = beerRepository;
-        }
+        public BeerBusiness(IBeerDbContext beerContext) =>
+            this.beerContext = beerContext;
 
         public IEnumerable<Beer> GetAll(Expression<Func<Beer, bool>> predicate = null) =>
             beerContext.Beers
