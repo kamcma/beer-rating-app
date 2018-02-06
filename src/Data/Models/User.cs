@@ -7,11 +7,6 @@ namespace BeerApp.Data.Models
     [Table("user")]
     public class User
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Column("id")]
-        public int Id { get; set; }
-
         [Column("first_name")]
         public string FirstName { get; set; }
 

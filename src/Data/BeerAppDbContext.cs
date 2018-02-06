@@ -21,19 +21,38 @@ namespace BeerApp.Data
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<User>()
+                .HasKey(user => user.EmailAddress);
+
+            modelBuilder.Entity<Brewery>()
+                .HasKey(brewery => brewery.Name);
+
+            modelBuilder.Entity<Beer>()
+                .HasKey(beer => new { beer.Name, beer.BreweryName });
             modelBuilder.Entity<Beer>()
                 .HasOne(beer => beer.Brewery)
                 .WithMany(brewery => brewery.Beers)
-                .HasForeignKey(beer => beer.BreweryId);
+                .HasForeignKey(beer => beer.BreweryName);
 
+            modelBuilder.Entity<BeerRating>()
+                .HasKey(beerRating => new
+                {
+                    beerRating.UserEmailAddress,
+                    beerRating.BeerName,
+                    beerRating.BreweryName
+                });
             modelBuilder.Entity<BeerRating>()
                 .HasOne(beerRating => beerRating.User)
                 .WithMany(user => user.BeerRatings)
-                .HasForeignKey(beerRating => beerRating.UserId);
+                .HasForeignKey(beerRating => beerRating.UserEmailAddress);
             modelBuilder.Entity<BeerRating>()
                 .HasOne(beerRating => beerRating.Beer)
                 .WithMany(beer => beer.BeerRatings)
-                .HasForeignKey(beerRating => beerRating.BeerId);
+                .HasForeignKey(beerRating => new
+                {
+                    beerRating.BeerName,
+                    beerRating.BreweryName
+                });
         }
     }
 

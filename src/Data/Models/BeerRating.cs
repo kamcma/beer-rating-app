@@ -7,21 +7,19 @@ namespace BeerApp.Data.Models
     [Table("beer_rating")]
     public class BeerRating
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Column("id")]
-        public int Id { get; set; }
-
         [Column("thumbs_up")]
         public bool ThumbsUp { get; set; }
 
-        [Column("user_id")]
-        public int UserId { get; set; }
+        [Column("user_email_address")]
+        public string UserEmailAddress { get; set; }
 
         public virtual User User { get; set; }
 
-        [Column("beer_id")]
-        public int BeerId { get; set; }
+        [Column("beer_name")]
+        public string BeerName { get; set; }
+
+        [Column("brewery_name")]
+        public string BreweryName { get; set; }
 
         public virtual Beer Beer { get; set; }
 

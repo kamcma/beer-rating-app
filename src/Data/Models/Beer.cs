@@ -7,16 +7,11 @@ namespace BeerApp.Data.Models
     [Table("beer")]
     public class Beer
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Column("id")]
-        public int Id { get; set; }
-
         [Column("name")]
         public string Name { get; set; }
 
-        [Column("brewery_id")]
-        public int BreweryId { get; set; }
+        [Column("brewery_name")]
+        public string BreweryName { get; set; }
 
         public virtual Brewery Brewery { get; set; }
 
