@@ -9,5 +9,6 @@ namespace BeerApp.Business.Contracts
     {
         IEnumerable<Beer> GetAll(Expression<Func<Beer, bool>> predicate = null);
         IEnumerable<Beer> GetAllByRating(int pageIndex, bool descending);
+        IEnumerable<Beer> GetCoLikedBeers(Beer beer);
     }
 }

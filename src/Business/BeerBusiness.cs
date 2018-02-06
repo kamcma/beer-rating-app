@@ -29,5 +29,16 @@ namespace BeerApp.Business
                     beer.BeerRatings.Average(rating => rating.ThumbsUp ? 1.0 : 0.0)
                 )
                 .Page(pageIndex, 10);
+
+        public IEnumerable<Beer> GetCoLikedBeers(Beer beer) =>
+            beerContext.Beers.Attach(beer)
+                .Collection(beerEntity => beerEntity.BeerRatings).Query()
+                .Where(beerRating => beerRating.ThumbsUp)
+                .Select(beerRating => beerRating.User).Distinct()
+                .SelectMany(user => user.BeerRatings)
+                .Where(beerRating => beerRating.ThumbsUp)
+                .GroupBy(beerRating => beerRating.Beer)
+                .OrderByDescending(group => group.Count())
+                .Select(group => group.Key);
     }
 }
