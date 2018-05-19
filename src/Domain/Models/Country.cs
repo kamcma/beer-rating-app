@@ -1,6 +1,6 @@
-namespace BeerApp.Data.Models
+namespace BeerApp.Domain.Models
 {
-    public enum Country : short
+    public enum Country : int
     {
         Brazil = 076,
         China = 156,
