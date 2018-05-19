@@ -28,4 +28,11 @@ namespace BeerApp.Data.Contracts
     {
         DbSet<BeerRating> BeerRatings { get; set; }
     }
+
+    public interface IBeerAppDbContext :
+        IBreweryDbContext,
+        IBeerDbContext,
+        IUserDbContext,
+        IBeerRatingDbContext
+    { }
 }
