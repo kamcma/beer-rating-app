@@ -5,11 +5,15 @@ using System.Threading.Tasks;
 
 namespace BeerApp.Domain.Contracts
 {
-    public interface IRepository<T>
+    public interface IReadOnlyRepository<T> where T : class, IEntity
+    {
+        Task<IEnumerable<T>> Set();
+        Task<IEnumerable<T>> Set(Expression<Func<T, bool>> predicate);
+    }
+
+    public interface IRepository<T> : IReadOnlyRepository<T> where T : class, IEntity
     {
         Task<int> Add(T entity);
-        Task<IEnumerable<T>> Get();
-        Task<IEnumerable<T>> Get(Expression<Func<T, bool>> predicate);
         Task<int> Update(T entity);
         Task<int> Delete(T entity);
     }
