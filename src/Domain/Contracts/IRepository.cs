@@ -7,8 +7,8 @@ namespace BeerApp.Domain.Contracts
 {
     public interface IReadOnlyRepository<T> where T : class, IEntity
     {
-        Task<IEnumerable<T>> Set();
-        Task<IEnumerable<T>> Set(Expression<Func<T, bool>> predicate);
+        Task<IEnumerable<T>> Get();
+        Task<IEnumerable<T>> Get(Expression<Func<T, bool>> predicate);
     }
 
     public interface IRepository<T> : IReadOnlyRepository<T> where T : class, IEntity

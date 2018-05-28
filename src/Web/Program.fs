@@ -16,7 +16,7 @@ let getBreweriesHandler : HttpHandler =
     fun (next : HttpFunc) (ctx : HttpContext) ->
         task {
             let breweryRepository = ctx.GetService<IRepository<Brewery>>()
-            let! breweries = breweryRepository.Set()
+            let! breweries = breweryRepository.Get()
             let breweryNames = breweries |> Seq.map (fun brewery -> brewery.Name)
             let returnStr =
                 match Seq.isEmpty breweryNames with

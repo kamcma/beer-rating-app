@@ -15,10 +15,10 @@ namespace BeerApp.Data
         public ReadOnlyRepository(BeerAppDbContext beerAppDbContext) =>
             beerAppDbContext_ = beerAppDbContext;
 
-        public async Task<IEnumerable<T>> Set() =>
+        public async Task<IEnumerable<T>> Get() =>
             await beerAppDbContext_.Set<T>().ToListAsync();
 
-        public async Task<IEnumerable<T>> Set(Expression<Func<T, bool>> predicate) =>
+        public async Task<IEnumerable<T>> Get(Expression<Func<T, bool>> predicate) =>
             await beerAppDbContext_.Set<T>().Where(predicate).ToListAsync();
     }
 
