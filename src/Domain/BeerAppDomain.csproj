@@ -5,6 +5,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="NodaTime" Version="2.3.*" />
     <PackageReference Include="System.ComponentModel.Annotations" Version="4.4.*" />
   </ItemGroup>
 
