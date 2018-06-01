@@ -21,7 +21,9 @@ let getBreweriesHandler : HttpHandler =
             let returnStr =
                 match Seq.isEmpty breweryNames with
                 | true -> "No breweries"
-                | false -> breweryNames |> Seq.fold (fun acc breweryName -> acc + breweryName + Environment.NewLine) String.Empty
+                | false ->
+                    breweryNames
+                    |> Seq.fold (fun acc breweryName -> acc + breweryName + Environment.NewLine) String.Empty
             return! text returnStr next ctx
         }
 
@@ -35,11 +37,23 @@ let configureApp (app: IApplicationBuilder) =
     app.UseGiraffe webApp
 
 let configureServices (services: IServiceCollection) =
-    services.AddGiraffe() |> ignore
+    services.AddGiraffe()
+    |> ignore
 
     services.AddDbContext<BeerAppDbContext>(fun options ->
-            options.UseNpgsql("Server=localhost;Database=giraffe-test") |> ignore)
-        .AddScoped<IRepository<Brewery>, Repository<Brewery>>() |> ignore
+            options.UseInMemoryDatabase("giraffe-test")
+            |> ignore)
+        .AddScoped<IRepository<Brewery>, Repository<Brewery>>()
+        |> ignore
+
+    // services.AddEntityFrameworkNpgsql()
+    //     .AddDbContext<BeerAppDbContext>(fun builder ->
+    //         builder.UseNpgsql("Server=localhost;Database=giraffe-test", fun npgsqlBuilder ->
+    //             npgsqlBuilder.UseNodaTime()
+    //             |> ignore)
+    //         |> ignore)
+    //     .AddScoped<IRepository<Brewery>, Repository<Brewery>>()
+    //     |> ignore
 
 [<EntryPoint>]
 let main _ =
@@ -52,7 +66,8 @@ let main _ =
     using (host.Services.CreateScope()) (fun scope ->
         let services = scope.ServiceProvider
         let context = services.GetService<BeerAppDbContext>()
-        context.Database.EnsureCreated() |> ignore
+        context.Database.EnsureCreated()
+        |> ignore
     )
 
     host.Run()
